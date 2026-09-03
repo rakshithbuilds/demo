@@ -1,18 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Anton, Archivo } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/**
+ * Display face (spec §29.3): heavy, condensed grotesk for editorial/brutalist
+ * headlines at huge scale. Anton ships a single weight that is already heavy —
+ * there is no lighter cut to fall back to, which is the point.
+ */
+const anton = Anton({
+  variable: "--font-anton",
   subsets: ["latin"],
+  weight: "400",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+/**
+ * Body face (spec §29.3): clean grotesk with a full variable weight axis, so
+ * body copy can sit thin and gray without switching families.
+ */
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  display: "swap",
 });
 
-// Placeholder metadata for Phase 0. Full SEO metadata (title, description,
+// Placeholder metadata for Phase 1. Full SEO metadata (title, description,
 // OG image) derived from the hero copy lands with the real page — spec §31.
 export const metadata: Metadata = {
   title: "ARVA Studios — Build. Create. Automate.",
@@ -24,9 +36,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${anton.variable} ${archivo.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

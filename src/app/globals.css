@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   ARVA Studio — design tokens (spec §29)
+   ==========================================================================
+   One accent colour, a near-black/cream section rhythm, and a heavy condensed
+   display face over a clean grotesk body face. Nothing else. Every value here
+   is referenced by name; no component hardcodes a hex.
+   ========================================================================== */
+
+@theme {
+  /* --- Surfaces ------------------------------------------------------- */
+  --color-ink: #0a0a0a; /* dark-section ground */
+  --color-ink-raised: #131316; /* cards/inset panels on dark */
+  --color-cream: #f4f1ea; /* light-section ground */
+  --color-cream-raised: #eae6dc; /* cards/inset panels on cream */
+
+  /* --- Text on dark (contrast measured against --color-ink) ----------- */
+  --color-fog: #ededef; /* primary   17.0:1 */
+  --color-mist: #a8a8b3; /* body      8.4:1  */
+  --color-muted: #83838f; /* tertiary  5.3:1  */
+
+  /* --- Text on cream (measured against --color-cream) ------------------ */
+  --color-ink-soft: #5a5a63; /* body      6.1:1 */
+
+  /* --- Accent (spec §29.2) --------------------------------------------
+     Confirmed: #C9A227 antique gold. 8.2:1 on --color-ink.
+     The same hue fails on cream (2.2:1), so light sections use --color-gold-deep
+     (5.1:1) for anything that carries meaning. Still one accent, darkened to
+     stay legible — never a second brand colour.
+     Used sparingly: eyebrow labels, numbered tags, divider rules under
+     headlines, price figures, hover underlines, focus rings. Not UI chrome. */
+  --color-gold: #c9a227;
+  --color-gold-deep: #7d6212;
+
+  /* --- Hairlines -------------------------------------------------------- */
+  --color-rule-dark: rgb(255 255 255 / 0.12);
+  --color-rule-light: rgb(10 10 10 / 0.14);
+
+  /* --- Radii (spec §29.7) ----------------------------------------------
+     Pill for primary hero/CTA buttons, 6–8px for secondary/nav buttons. */
+  --radius-pill: 9999px;
+  --radius-control: 7px;
+
+  /* --- Breakpoints (spec §29.7) ----------------------------------------
+     360 is the primary mobile target (§31), not an afterthought. */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* --- Spacing ----------------------------------------------------------
+     4px base step (spec §29.7); Tailwind's scale is already 4px-based. */
+  --spacing: 0.25rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Font families come from next/font in layout.tsx, which self-hosts them
+     and exposes each as a CSS variable. `inline` so utilities resolve to the
+     variable itself rather than a snapshot of its value. */
+  --font-display: var(--font-anton);
+  --font-body: var(--font-archivo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ==========================================================================
+   Base
+   ========================================================================== */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-fog);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  /* Dark-mode-led (§29.1): the page ground is near-black and light sections
+     opt in, rather than the reverse. */
+}
+
+/* Editorial display type: huge scale, tight tracking (§29.3, §13). */
+.type-display {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400; /* Anton ships one weight, and it is already heavy */
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Section rhythm (spec §29.1)
+   ==========================================================================
+   TODO — CONFIRM (open item 3): the source spec's section-by-section light/dark
+   assignment was truncated. These two classes implement the reconstruction —
+   Splash(dark) → Hero(dark) → About(cream) → Pillars(dark) → 4 detail
+   sections(dark) → Process(cream) → Comparison(split) → Final CTA(dark) →
+   Footer(dark). Sections apply .section-dark / .section-light; changing the
+   rhythm later means swapping those class names, not editing colours.
+   ========================================================================== */
+
+.section-dark {
+  --focus-ring: var(--color-gold);
+  background: var(--color-ink);
+  color: var(--color-fog);
+}
+
+.section-light {
+  /* Gold is too pale on cream to serve as a focus indicator, so light
+     sections swap in the deep variant (§31 focus-appearance contrast). */
+  --focus-ring: var(--color-gold-deep);
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+/* ==========================================================================
+   Focus (spec §31 — gold-accent focus ring, visible everywhere)
+   ========================================================================== */
+
+:root {
+  --focus-ring: var(--color-gold);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ==========================================================================
+   Motion (spec §21, §30)
+   ==========================================================================
+   Strip non-essential motion for users who ask for it. The splash-to-hero
+   transition is *shortened, not removed* (§30) — that override lives with the
+   splash component so the exception stays visible next to the rule.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
