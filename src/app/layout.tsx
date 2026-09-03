@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import { Anton, Archivo } from "next/font/google";
+
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { Splash } from "@/components/layout/Splash";
 import "./globals.css";
 
 /**
@@ -38,7 +42,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${anton.variable} ${archivo.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col" id="top">
+        <Splash />
+        <Header />
+        <div className="flex flex-1 flex-col">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }

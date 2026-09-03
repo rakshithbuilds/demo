@@ -56,6 +56,14 @@
   --spacing: 0.25rem;
 }
 
+/* Sticky-header heights (spec §29.6). Published as variables because the
+   header shrinks on scroll and anchor targets must clear whichever height is
+   current — see the scroll-margin rule in Phase 3. */
+:root {
+  --header-h: 4.5rem; /* 72px, at rest */
+  --header-h-sm: 3.5rem; /* 56px, shrunk */
+}
+
 @theme inline {
   /* Font families come from next/font in layout.tsx, which self-hosts them
      and exposes each as a CSS variable. `inline` so utilities resolve to the
@@ -141,4 +149,16 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* The one documented exception (§30): the splash-to-hero transition is
+     shortened for these users, not removed, so the page still reads as one
+     continuous entrance rather than a hard cut. */
+  .splash-fade {
+    transition-duration: 180ms !important;
+  }
+}
+
+/* Splash cross-fade. Paired with the reduced-motion override above. */
+.splash-fade {
+  transition: opacity 650ms ease-out;
 }
