@@ -59,10 +59,9 @@ export function Header() {
         <a
           href="#top"
           className="flex items-center gap-3"
-          aria-label={`${"ARVA Studios"} — back to top`}
+          aria-label="ARVA Studios — back to top"
         >
           <LogoMark />
-          <span className="sr-only">ARVA Studios</span>
         </a>
 
         <div className="flex items-center gap-3">

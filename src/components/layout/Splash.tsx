@@ -72,7 +72,7 @@ export function Splash() {
         leaving ? "pointer-events-none opacity-0" : "opacity-100",
       ].join(" ")}
     >
-      <Wordmark className="text-4xl text-fog sm:text-6xl" />
+      <Wordmark className="text-4xl sm:text-6xl" />
       <p className="font-body text-xs tracking-[0.24em] text-muted uppercase">
         {SITE.location}
       </p>

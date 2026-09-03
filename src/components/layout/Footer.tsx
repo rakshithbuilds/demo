@@ -20,7 +20,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-12">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
           <div className="flex max-w-sm flex-col gap-3">
-            <Wordmark className="text-2xl text-fog" />
+            <Wordmark className="items-start text-2xl" />
             <p className="font-body text-sm leading-relaxed text-mist">
               {SITE.tagline}
             </p>
