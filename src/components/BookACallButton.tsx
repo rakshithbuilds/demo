@@ -30,8 +30,6 @@ export function BookACallButton({
         arrow="none"
         disabled
         className={className}
-        // Explains *why* it is disabled — a bare disabled control is a dead end.
-        title="The scheduling link has not been configured yet."
       >
         Calendar link coming soon
       </Button>

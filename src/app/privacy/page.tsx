@@ -23,7 +23,8 @@ export const metadata: Metadata = {
  */
 export default function PrivacyPage() {
   return (
-    <main>
+    // tabIndex allows the skip link to move focus here, not just scroll.
+    <main id="main" tabIndex={-1} className="outline-none">
       <Section id="privacy" tone="dark" labelledBy="privacy-heading">
         <div className="flex max-w-2xl flex-col gap-6">
           <h1

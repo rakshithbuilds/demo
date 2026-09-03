@@ -3,7 +3,7 @@ import { Anton, Archivo } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { Splash } from "@/components/layout/Splash";
+import { SkipLink } from "@/components/layout/SkipLink";
 import "./globals.css";
 
 /**
@@ -43,7 +43,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${anton.variable} ${archivo.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col" id="top">
-        <Splash />
+        {/* First focusable element on the page (§31). */}
+        <SkipLink />
         <Header />
         <div className="flex flex-1 flex-col">{children}</div>
         <Footer />

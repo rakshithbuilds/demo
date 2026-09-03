@@ -4,6 +4,7 @@ import { BrandDesign } from "@/components/sections/BrandDesign";
 import { Comparison } from "@/components/sections/Comparison";
 import { ContentVideo } from "@/components/sections/ContentVideo";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { Splash } from "@/components/layout/Splash";
 import { Hero } from "@/components/sections/Hero";
 import { Pillars } from "@/components/sections/Pillars";
 import { Process } from "@/components/sections/Process";
@@ -16,7 +17,12 @@ import { WebProducts } from "@/components/sections/WebProducts";
  */
 export default function Home() {
   return (
-    <main>
+    // tabIndex allows the skip link to move focus here, not just scroll.
+    <main id="main" tabIndex={-1} className="outline-none">
+      {/* The splash is the entrance to the site (§32.1, §4), so it belongs to
+          this route — not the root layout, where it also played over the
+          privacy page and stole first focus there. */}
+      <Splash />
       <Hero />
       <About />
       <Pillars />

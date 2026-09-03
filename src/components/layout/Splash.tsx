@@ -33,7 +33,15 @@ export function Splash() {
   const dismiss = useCallback(() => {
     setLeaving(true);
     // Unmount after the fade so the overlay stops intercepting anything.
-    const id = window.setTimeout(() => setDismissed(true), 700);
+    const id = window.setTimeout(() => {
+      setDismissed(true);
+      // The Skip button is about to disappear from mid-document, which would
+      // leave the sequential focus starting point there — the next Tab would
+      // land on the header and quietly bypass the skip link. Hand focus back
+      // to the top instead. Programmatic focus does not match :focus-visible
+      // for pointer users, so nothing flashes on screen for them.
+      document.getElementById("skip-to-content")?.focus();
+    }, 700);
     timers.current.push(id);
   }, []);
 
