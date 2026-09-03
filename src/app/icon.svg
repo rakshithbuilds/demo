@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ARVA Studios">
+  <rect width="64" height="64" rx="12" fill="#0A0A0A"/>
+  <!-- Thin geometric A, matching the wordmark's construction rather than the
+       heavy display face used for headlines. -->
+  <path d="M32 14 L47 50 M32 14 L17 50 M23.6 39 H40.4"
+        fill="none" stroke="#EDEDEF" stroke-width="3.4"
+        stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>

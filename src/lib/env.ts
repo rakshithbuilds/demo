@@ -37,6 +37,15 @@ export function getCalendarLink(): string | null {
   return raw;
 }
 
+/**
+ * Canonical site origin, used to build absolute Open Graph and canonical URLs.
+ * Falls back to the production domain so metadata is still well-formed in a
+ * checkout with no env file.
+ */
+export function getSiteUrl(): string {
+  return clean(process.env.NEXT_PUBLIC_SITE_URL) ?? "https://arvastudios.in";
+}
+
 /** Supabase URL + anon key. Public by design; safe to reach the browser. */
 export function getPublicSupabaseConfig(): { url: string; anonKey: string } | null {
   const url = clean(process.env.NEXT_PUBLIC_SUPABASE_URL);

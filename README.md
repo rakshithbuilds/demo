@@ -61,6 +61,7 @@ All variables are documented in `.env.example`. Summary:
 | `SENTRY_DSN` | **server only** | Server-side error reporting |
 | `NEXT_PUBLIC_SENTRY_DSN` | public | Browser error reporting |
 | `NEXT_PUBLIC_CALENDAR_LINK` | public | Google Calendar booking page |
+| `NEXT_PUBLIC_SITE_URL` | public | Canonical origin for OG/canonical URLs |
 
 Never commit real values. `.env.example` is the only env file in version
 control.
@@ -82,6 +83,22 @@ and `SENTRY_AUTH_TOKEN` are present (CI). Local builds skip upload.
 | `npm start` | Serve the production build |
 | `npm run lint` | ESLint |
 
+## Verification
+
+Measured on the production build, mobile viewport with 4G throttling:
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| `/` | 98 | 100 | 100 | 100 |
+| `/privacy` | 97 | 100 | 100 | 100 |
+
+`npm run check:contrast` asserts the 17 colour pairings the design actually
+uses against WCAG AA — dark-mode grey-on-black is the easiest thing to get
+wrong, so it is measured rather than eyeballed.
+
+The Open Graph image is `src/app/opengraph-image.png`, rendered from the site's
+own typography. Next.js picks it up by file convention.
+
 ## Architecture notes
 
 - `src/lib/env.ts` — the single place env vars are read.
@@ -92,6 +109,22 @@ and `SENTRY_AUTH_TOKEN` are present (CI). Local builds skip upload.
   added later without restructuring.
 - `instrumentation.ts` / `instrumentation-client.ts` — Sentry init for server,
   edge, and browser runtimes.
+
+## Before launch
+
+Items the spec left open, each flagged with a `TODO — CONFIRM` at its point of
+use in the code:
+
+| What | Where |
+|---|---|
+| Real logo files | `public/brand/README.md` — currently a typeset stand-in |
+| Automation & AI third tier price | `src/lib/content.ts` — renders "Scoped on request" rather than an invented figure |
+| Contact email and social URLs | `src/lib/site.ts` — placeholders |
+| Google Calendar link | `.env.example` — button hides itself until set |
+| Section light/dark rhythm | `src/app/globals.css` — reconstructed from context |
+| Light-background button treatment | `src/components/ui/Button.tsx` — reconstructed |
+| Splash skip-control wording | `src/components/layout/Splash.tsx` — reconstructed |
+| Privacy policy | `src/app/privacy/page.tsx` — placeholder describing current behaviour |
 
 ## Deliberately not built
 

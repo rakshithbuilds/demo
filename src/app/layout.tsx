@@ -4,6 +4,7 @@ import { Anton, Archivo } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { getSiteUrl } from "@/lib/env";
 import "./globals.css";
 
 /**
@@ -28,12 +29,37 @@ const archivo = Archivo({
   display: "swap",
 });
 
-// Placeholder metadata for Phase 1. Full SEO metadata (title, description,
-// OG image) derived from the hero copy lands with the real page — spec §31.
+const TITLE = "ARVA Studios — Build. Create. Automate.";
+const DESCRIPTION =
+  "A digital creative studio for founders who are done settling for average. Content, web products, automation and brand design from one Bengaluru studio.";
+
+/**
+ * SEO metadata (spec §31), derived from the hero copy since none was supplied.
+ *
+ * The Open Graph image is `src/app/opengraph-image.png`, which Next.js picks up
+ * by file convention and wires into the tags automatically — no photography,
+ * just the type system (§29.4).
+ */
 export const metadata: Metadata = {
-  title: "ARVA Studios — Build. Create. Automate.",
-  description:
-    "A digital creative studio for founders who are done settling for average.",
+  metadataBase: new URL(getSiteUrl()),
+  title: { default: TITLE, template: "%s — ARVA Studios" },
+  description: DESCRIPTION,
+  applicationName: "ARVA Studios",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "ARVA Studios",
+    title: TITLE,
+    description: DESCRIPTION,
+    locale: "en_IN",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
