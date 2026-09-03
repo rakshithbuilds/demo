@@ -119,6 +119,30 @@ body {
 }
 
 /* ==========================================================================
+   Anchor scrolling (spec §32.2, §32.4)
+   ==========================================================================
+   Hero CTAs and the pillar "Explore" links jump to sections that would
+   otherwise land underneath the sticky header. Handled in CSS rather than with
+   a scroll library: §30 rules out a JS animation runtime for something this
+   simple, and the native pairing below costs nothing.
+
+   The offset uses the *shrunk* header height, because the header is always in
+   its shrunk state by the time any in-page jump completes, plus a little
+   breathing room so the heading is not flush against it.
+
+   `scroll-behavior: smooth` is reverted to `auto` for reduced-motion users by
+   the blanket rule further down.
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+[data-section] {
+  scroll-margin-top: calc(var(--header-h-sm) + 1.5rem);
+}
+
+/* ==========================================================================
    Focus (spec §31 — gold-accent focus ring, visible everywhere)
    ========================================================================== */
 

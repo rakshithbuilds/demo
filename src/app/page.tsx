@@ -1,3 +1,4 @@
+import { Section } from "@/components/layout/Section";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { Input, Select, Textarea } from "@/components/ui/Field";
 import { Pill } from "@/components/ui/Pill";
@@ -37,8 +38,17 @@ export default function Home() {
   return (
     <main>
       {/* ---------------- Dark ground ---------------- */}
-      <section className="section-dark px-6 py-16 sm:px-10 lg:px-16">
-        <div className="mx-auto flex max-w-5xl flex-col gap-14">
+      <Section id="tokens" tone="dark">
+        <div className="flex flex-col gap-14">
+          <nav aria-label="Specimen sections" className="flex gap-4">
+            <a href="#tokens" className="font-body text-xs tracking-[0.16em] text-gold uppercase underline-offset-4 hover:underline">
+              Tokens
+            </a>
+            <a href="#light-demo" className="font-body text-xs tracking-[0.16em] text-gold uppercase underline-offset-4 hover:underline">
+              Light Section
+            </a>
+          </nav>
+
           <div className="flex flex-col gap-4">
             <Eyebrow>Phase 1 / Design Tokens</Eyebrow>
             <h1 className="type-display text-5xl sm:text-7xl lg:text-8xl">
@@ -160,11 +170,11 @@ export default function Home() {
             </Table>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* ---------------- Light ground ---------------- */}
-      <section className="section-light px-6 py-16 sm:px-10 lg:px-16">
-        <div className="mx-auto flex max-w-5xl flex-col gap-10">
+      <Section id="light-demo" tone="light">
+        <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-4">
             <Eyebrow light>Phase 1 / Light Section</Eyebrow>
             <h2 className="type-display text-4xl sm:text-6xl">
@@ -198,7 +208,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }
