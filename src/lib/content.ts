@@ -91,3 +91,98 @@ export const PILLARS = [
 ] as const;
 
 export type Pillar = (typeof PILLARS)[number];
+
+/* ------------------------------------------------------------------------ */
+/* Pillar detail sections (§32.5–§32.8)                                       */
+/* ------------------------------------------------------------------------ */
+
+export const CONTENT_VIDEO = {
+  headline: "Content That Moves People.",
+  items: [
+    { name: "Long-Form YouTube", note: "Episodes that build an audience, not just views." },
+    { name: "Short-Form Reels & Shorts", note: "Vertical cuts engineered for reach." },
+    { name: "Brand Story Films", note: "The film that explains why you exist." },
+    { name: "Campaign & Ad Video", note: "Creative built to convert, not to win awards." },
+    { name: "Personal Brand Content", note: "Founder-led content, produced on a system." },
+  ],
+  callout: "One shoot day. Six formats. Infinite reach.",
+} as const;
+
+export const WEB_PRODUCTS = {
+  headline: "Products Built to Work While You Sleep.",
+  /**
+   * Confirmed pricing (§32.6). These are public-facing starting prices —
+   * §34 forbids any payment flow, so they are informational only.
+   */
+  pricing: [
+    { product: "Landing Page", price: "₹18,000+" },
+    { product: "Full Website", price: "₹35,000+" },
+    { product: "Booking System", price: "₹45,000+" },
+    { product: "Client Portal", price: "₹60,000+" },
+    { product: "E-Commerce & Internal Tool", price: "₹75,000+" },
+  ],
+  note: "All prices are starting points. We scope after a conversation. Conversations are free.",
+  builtWith: [
+    "Next.js",
+    "Framer",
+    "Supabase",
+    "Neon",
+    "Clerk",
+    "Vercel",
+    "Cloudflare R2",
+  ],
+} as const;
+
+export const AUTOMATION_AI = {
+  headline: "Your Business Running at 3 AM.",
+  tiers: [
+    {
+      name: "Starter",
+      price: "₹18,000 – 25,000",
+      points: [
+        "One workflow, automated end to end",
+        "Lead capture straight into your CRM",
+        "Email and WhatsApp notifications",
+      ],
+    },
+    {
+      name: "Growth",
+      price: "₹35,000 – 60,000",
+      points: [
+        "Multi-step workflows across tools",
+        "An AI assistant trained on your data",
+        "CRM, lead routing and reporting",
+      ],
+    },
+    {
+      /**
+       * TODO — CONFIRM (spec §32.7, open item 6): the source was cut off at
+       * "Full-Sta…" with no visible figure. The name below is the doc's
+       * partial reconstruction. The price is deliberately NOT reconstructed —
+       * there was no fragment of a number to work from, and inventing a public
+       * price is worse than saying it is scoped. Replace both once confirmed.
+       */
+      name: "Full-Stack / Enterprise",
+      price: "Scoped on request",
+      priceUnconfirmed: true,
+      points: [
+        "Systems across the whole business",
+        "Custom integrations and data pipelines",
+        "Ongoing orchestration and support",
+      ],
+    },
+  ],
+  note: "Ongoing support from ₹5,000/month.",
+} as const;
+
+export const BRAND_DESIGN = {
+  headline: "Design That Stops the Scroll.",
+  items: [
+    { name: "Logo & Brand Kit", note: "The identity and the rules that keep it consistent." },
+    { name: "Content Graphics", note: "Templates your team can actually reuse." },
+    { name: "UI & Digital Design", note: "Interfaces designed to be built, not just admired." },
+    { name: "Campaign Creatives", note: "One idea, every placement it needs." },
+    { name: "Professional Assets", note: "Decks, profiles and documents that hold up." },
+    { name: "Production Design", note: "Sets, thumbnails and on-screen graphics." },
+  ],
+} as const;
