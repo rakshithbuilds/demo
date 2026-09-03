@@ -239,3 +239,17 @@ export const COMPARISON = {
     ],
   },
 } as const;
+
+/* ------------------------------------------------------------------------ */
+/* Final CTA (§32.11)                                                         */
+/* ------------------------------------------------------------------------ */
+
+export const FINAL_CTA = {
+  headline: "Let's Build Something That Lasts.",
+  body: "Tell us what you're building. We'll tell you what it actually takes — scope, timeline, and what it costs. No pitch deck.",
+  milestones: [
+    { label: "Early Access", value: "Dec 2026" },
+    { label: "Full Launch", value: "Jan 1, 2027" },
+  ],
+  reassurance: "No commitment. No agency speak. Just a real conversation.",
+} as const;
