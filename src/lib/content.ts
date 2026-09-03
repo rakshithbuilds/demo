@@ -186,3 +186,56 @@ export const BRAND_DESIGN = {
     { name: "Production Design", note: "Sets, thumbnails and on-screen graphics." },
   ],
 } as const;
+
+/* ------------------------------------------------------------------------ */
+/* Process + Comparison (§32.9–§32.10)                                        */
+/* ------------------------------------------------------------------------ */
+
+export const PROCESS = {
+  headline: ["Four Steps.", "One Standard."],
+  steps: [
+    {
+      index: "01",
+      name: "Discover",
+      meta: "Week 0",
+      body: "We start with your business, not your brief. What is broken, what is working, and what the gap is costing you.",
+    },
+    {
+      index: "02",
+      name: "Architect",
+      meta: "Week 1",
+      body: "We map the system before anyone opens a design tool. Scope, structure, and what finished actually means.",
+    },
+    {
+      index: "03",
+      name: "Build",
+      meta: "Weeks 1–4",
+      body: "We build in the open. You see progress every week, not a reveal at the end.",
+    },
+    {
+      index: "04",
+      name: "Deliver",
+      meta: "Done Means Done",
+      body: "Handover, documentation, and a system your team can run without us in the room.",
+    },
+  ],
+} as const;
+
+export const COMPARISON = {
+  left: {
+    title: "What Most Agencies Do",
+    points: [
+      "One service. Four vendors. No shared vision.",
+      "Volume over quality.",
+      "Cold outreach.",
+    ],
+  },
+  right: {
+    title: "What ARVA Does",
+    points: [
+      "One studio. Content + Web + Automation + Design. Connected.",
+      "Fewer deliverables. More intentional. Each one built to last.",
+      "Content that earns clients. Work that proves itself. Legacy, not just output.",
+    ],
+  },
+} as const;
