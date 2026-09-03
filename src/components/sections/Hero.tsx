@@ -14,24 +14,28 @@ export function Hero() {
   return (
     <Section id="hero" tone="dark" padding="none" className="relative overflow-hidden">
       {/* Decorative ghost wordmark (§29.4 — typography, never photography).
-          §26.6 requires it to stay clear of the nav and the CTA cluster at
-          every breakpoint, and §19.3 requires it not to bleed into the next
-          section: hence `overflow-hidden` on the section, a fade mask at the
-          bottom edge, and a position that sits behind the copy rather than
-          across it. It is inert to pointer and assistive tech. */}
-      <span
+          §19.2/§26.6 require it never to intersect an interactive element at
+          ANY breakpoint. Rather than nudging offsets per breakpoint, it lives
+          in a fixed-height band pinned to the bottom of the hero, and the
+          content reserves exactly that much bottom padding — so an overlap is
+          structurally impossible rather than merely untested. The band also
+          clips it, satisfying §19.3's containment rule. */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-[12%] bottom-[8%] -z-0 select-none type-display text-[28vw] leading-none text-white/[0.035] sm:-right-[6%] sm:text-[22vw] lg:text-[16vw]"
+        data-hero-decor=""
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-28 overflow-hidden sm:h-36 lg:h-48"
         style={{
           maskImage: "linear-gradient(to bottom, black 55%, transparent 100%)",
           WebkitMaskImage:
             "linear-gradient(to bottom, black 55%, transparent 100%)",
         }}
       >
-        ARVA
-      </span>
+        <span className="absolute -right-[6%] bottom-[-0.16em] select-none type-display text-[26vw] leading-none text-white/[0.04] lg:text-[16vw]">
+          ARVA
+        </span>
+      </div>
 
-      <div className="relative z-10 flex min-h-[calc(100svh-var(--header-h))] flex-col justify-center gap-8 py-16 sm:gap-10">
+      <div className="relative z-10 flex min-h-[calc(100svh-var(--header-h))] flex-col justify-center gap-8 pt-16 pb-28 sm:gap-10 sm:pb-36 lg:pb-48">
         <div className="flex flex-col gap-6">
           <Pill accent className="self-start">
             {HERO.pill}

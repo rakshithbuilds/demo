@@ -82,7 +82,7 @@ export function Pillars() {
                   reader's link list. */}
               <a
                 href={`#${pillar.id}`}
-                className="mt-auto inline-flex items-center gap-2 pt-2 font-body text-xs font-medium tracking-[0.16em] text-fog uppercase underline-offset-4 transition-colors duration-200 hover:text-gold hover:underline focus-visible:text-gold"
+                className="mt-auto inline-flex min-h-10 items-center gap-2 pt-2 font-body text-xs font-medium tracking-[0.16em] text-fog uppercase underline-offset-4 transition-colors duration-200 hover:text-gold hover:underline focus-visible:text-gold"
               >
                 Explore
                 <span className="sr-only"> {pillar.title} services</span>

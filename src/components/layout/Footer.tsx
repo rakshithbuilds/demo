@@ -40,7 +40,7 @@ export function Footer() {
                   aria-hidden="true"
                   className="mt-2 mb-4 block h-px w-8 bg-gold/40"
                 />
-                <ul className="flex flex-col gap-3">
+                <ul className="flex flex-col gap-2">
                   {group.links.map((link) => (
                     <li key={link.href}>
                       <a
@@ -48,7 +48,7 @@ export function Footer() {
                         {...("external" in link && link.external
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
-                        className="font-body text-sm text-mist underline-offset-4 transition-colors duration-200 hover:text-fog hover:underline focus-visible:text-fog focus-visible:underline"
+                        className="inline-flex min-h-7 items-center font-body text-sm text-mist underline-offset-4 transition-colors duration-200 hover:text-fog hover:underline focus-visible:text-fog focus-visible:underline"
                       >
                         {link.label}
                       </a>

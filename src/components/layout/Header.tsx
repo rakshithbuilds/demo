@@ -58,7 +58,9 @@ export function Header() {
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
         <a
           href="#top"
-          className="flex items-center gap-3"
+          // min-h keeps the logo a comfortable touch target; the text
+          // itself is only 18px tall (§19.9).
+          className="flex min-h-11 items-center gap-3"
           aria-label="ARVA Studios — back to top"
         >
           <LogoMark />
