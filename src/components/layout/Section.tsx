@@ -20,6 +20,7 @@ export function Section({
   children,
   className,
   labelledBy,
+  padding = "default",
 }: {
   id: string;
   tone: "dark" | "light";
@@ -27,6 +28,12 @@ export function Section({
   className?: string;
   /** id of the section's own heading, so the landmark is named. */
   labelledBy?: string;
+  /**
+   * `none` drops the standard vertical rhythm for sections that set their own
+   * (the hero). Kept as a prop rather than a className override because two
+   * competing padding utilities resolve by stylesheet order, not class order.
+   */
+  padding?: "default" | "none";
 }) {
   return (
     <section
@@ -40,7 +47,9 @@ export function Section({
         // viewport-tall section, which reads as a rendering glitch rather than
         // a focus cue. The heading inside is the real destination.
         "scroll-mt-[calc(var(--header-h-sm)+1.5rem)] outline-none",
-        "px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-32",
+        padding === "default"
+          ? "px-5 py-20 sm:px-8 sm:py-24 lg:px-12 lg:py-32"
+          : "px-5 sm:px-8 lg:px-12",
         className,
       )}
     >
