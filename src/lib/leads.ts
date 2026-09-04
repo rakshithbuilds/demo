@@ -78,7 +78,7 @@ export function validateLead(raw: Partial<Record<keyof LeadInput, unknown>>): Va
     company: str(raw.company),
     projectType: str(raw.projectType),
     budgetRange: str(raw.budgetRange),
-    message: str(raw.message),
+    message: str(raw.message, { keepNewlines: true }),
     website: str(raw.website),
   };
 
@@ -118,6 +118,22 @@ export function validateLead(raw: Partial<Record<keyof LeadInput, unknown>>): Va
   return { ok: true, value };
 }
 
-function str(input: unknown): string {
-  return typeof input === "string" ? input.trim() : "";
+/**
+ * Normalises a submitted value.
+ *
+ * Control characters are stripped because `name` and `company` are
+ * interpolated into the notification email's *subject* line. Resend's API is
+ * JSON so this is defence in depth rather than a live header-injection hole,
+ * but a subject is the wrong place to trust arbitrary bytes, and a stray
+ * newline would mangle it regardless of intent.
+ *
+ * `message` is a textarea, so its line breaks are meaningful and kept; only
+ * the other control characters go.
+ */
+function str(input: unknown, { keepNewlines = false } = {}): string {
+  if (typeof input !== "string") return "";
+  const stripped = keepNewlines
+    ? input.replace(/[\u0000-\u0009\u000b\u000c\u000e-\u001f\u007f]/g, "")
+    : input.replace(/[\u0000-\u001f\u007f]/g, " ");
+  return stripped.replace(/[ \t]+/g, " ").trim();
 }
