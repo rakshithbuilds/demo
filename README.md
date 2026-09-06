@@ -85,12 +85,32 @@ and `SENTRY_AUTH_TOKEN` are present (CI). Local builds skip upload.
 
 ## Verification
 
-Measured on the production build, mobile viewport with 4G throttling:
+Measured on the production build, mobile viewport with 4G throttling.
+Accessibility, Best Practices and SEO sit at 100. Performance is **bimodal**
+across runs, and the splash screen is why:
 
-| Page | Performance | Accessibility | Best Practices | SEO |
-|---|---|---|---|---|
-| `/` | 98 | 100 | 100 | 100 |
-| `/privacy` | 97 | 100 | 100 | 100 |
+| Largest Contentful Paint | Performance | What LCP landed on |
+|---|---|---|
+| 2.0s | 97–98 | the splash's own wordmark |
+| 3.0s | 89–92 | the hero, after the splash cleared |
+
+The splash holds 2.6s and fades over 700ms (spec §32.1), so the hero is not
+visible until ~3.3s. Which element Lighthouse counts as the largest contentful
+paint therefore varies run to run, and with it the score — six runs ranged 89
+to 98.
+
+This is structural, not measurement noise: a mandated 2.6s intro genuinely
+delays the largest element. Three ways to widen the margin, none applied
+because all three touch a spec'd design decision:
+
+1. Accept it — the spec requires the splash; scores sit around the target.
+2. Shorten the hold toward the 2.5s floor §32.1 allows.
+3. Set the splash wordmark larger than the hero headline, so LCP reliably
+   resolves to the splash at ~1.2s.
+
+Numbers above come from this container, which is virtualized and has no
+dedicated GPU. Re-measure on the deployed site before treating any of them as
+final.
 
 `npm run check:contrast` asserts the 17 colour pairings the design actually
 uses against WCAG AA — dark-mode grey-on-black is the easiest thing to get

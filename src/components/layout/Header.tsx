@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 import { BookACallButton } from "@/components/BookACallButton";
 import { LogoMark } from "@/components/brand/Logo";
-import { Pill } from "@/components/ui/Pill";
 import { cn } from "@/lib/cn";
 
 /**
@@ -66,17 +65,12 @@ export function Header() {
           <LogoMark />
         </a>
 
-        <div className="flex items-center gap-3">
-          {/* Hidden below sm so the CTA cluster never crowds at 360px
-              (§26.6). Visibility lives on a wrapper, not on the Pill's own
-              className: Pill's base sets `inline-flex`, and a `hidden` passed
-              alongside it is decided by Tailwind's source order rather than
-              class order — which silently loses. */}
-          <span className="hidden sm:contents">
-            <Pill accent>Early Access — Dec 2026</Pill>
-          </span>
-          <BookACallButton />
-        </div>
+        {/* The "Early Access — Dec 2026" pill lives in the hero (§32.2),
+            where it sits in the composition rather than competing with the
+            CTA. §29.6 also lists a utility pill here, but the two clauses
+            describe the same tag — running both rendered it twice on desktop.
+            The header keeps the logo and the CTA, per §34. */}
+        <BookACallButton />
       </div>
     </header>
   );
